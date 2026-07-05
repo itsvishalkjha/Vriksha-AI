@@ -108,15 +108,15 @@ function initPreloader() {
             duration: 2.2,
             ease: 'power4.out'
         }, 0.2);
-        
-        // Add a soft continuous pulse/glow animation to the logo
-        loadTimeline.to(logoImg, {
+        // Add a soft continuous pulse/glow animation to the logo independently so it doesn't block onComplete
+        gsap.to(logoImg, {
             filter: 'drop-shadow(0 0 15px rgba(184, 155, 114, 0.5))',
             duration: 1.0,
             repeat: -1,
             yoyo: true,
-            ease: 'sine.inOut'
-        }, 1.5);
+            ease: 'sine.inOut',
+            delay: 1.5
+        });
     }
 }
 
