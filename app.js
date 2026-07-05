@@ -19,7 +19,7 @@ const DEFAULT_WAITLIST_COUNT = 1420;
 // Initialize app when DOM content is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initCustomCursor();
-    initPreloader();
+    animateHeroEntrance();
     initParticleCanvas();
     initMagneticButtons();
     initHeroParallax();
@@ -68,72 +68,6 @@ function initCustomCursor() {
     });
 }
 
-/* --------------------------------------------------------------------------
-   2. Preloader wood-rings timeline
-   -------------------------------------------------------------------------- */
-function initPreloader() {
-    const preloader = document.getElementById('preloader');
-    const progressFill = document.querySelector('.loader-progress-fill');
-    
-    if (!preloader) return;
-
-    const logoImg = document.getElementById('logo-wood-rings');
-    if (logoImg) {
-        gsap.set(logoImg, { scale: 0.4, opacity: 0, rotation: -20 });
-    }
-
-    // Timeline for simulated loading and rings drawing
-    const loadTimeline = gsap.timeline({
-        onComplete: () => {
-            hidePreloader();
-        }
-    });
-
-    let loadProgress = { value: 0 };
-    loadTimeline.to(loadProgress, {
-        value: 100,
-        duration: 3.2,
-        ease: 'power2.out',
-        onUpdate: () => {
-            if (progressFill) progressFill.style.width = `${loadProgress.value}%`;
-        }
-    }, 0);
-
-    // Fade and scale in the logo icon beautifully
-    if (logoImg) {
-        loadTimeline.to(logoImg, {
-            scale: 1,
-            opacity: 1,
-            rotation: 0,
-            duration: 2.2,
-            ease: 'power4.out'
-        }, 0.2);
-        // Add a soft continuous pulse/glow animation to the logo independently so it doesn't block onComplete
-        gsap.to(logoImg, {
-            filter: 'drop-shadow(0 0 15px rgba(184, 155, 114, 0.5))',
-            duration: 1.0,
-            repeat: -1,
-            yoyo: true,
-            ease: 'sine.inOut',
-            delay: 1.5
-        });
-    }
-}
-
-function hidePreloader() {
-    const preloader = document.getElementById('preloader');
-    if (!preloader) return;
-
-    gsap.timeline({
-        onComplete: () => {
-            preloader.style.display = 'none';
-            animateHeroEntrance();
-        }
-    })
-    .to('.preloader-overlay', { opacity: 0, y: -20, duration: 0.5, ease: 'power2.inOut' })
-    .to(preloader, { clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)', duration: 0.8, ease: 'power4.inOut' });
-}
-
 function animateHeroEntrance() {
     gsap.timeline()
         .from('.app-header', { y: -30, opacity: 0, duration: 1, ease: 'power3.out' })
@@ -141,7 +75,6 @@ function animateHeroEntrance() {
         .from('.hero-title', { y: 40, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.6')
         .from('.hero-description', { y: 20, opacity: 0, duration: 0.8, ease: 'power2.out' }, '-=0.8')
         .from('.waitlist-form-container', { y: 20, opacity: 0, duration: 0.8, ease: 'power2.out' }, '-=0.6')
-        .from('.hero-stats', { y: 20, opacity: 0, duration: 0.8, ease: 'power2.out' }, '-=0.6')
         .from('.hero-graphic-block', { scale: 0.9, opacity: 0, duration: 1.2, ease: 'power3.out' }, '-=1.0')
         .from('.hero-scroll-indicator', { opacity: 0, y: -10, duration: 0.6 }, '-=0.4');
 }
@@ -178,19 +111,27 @@ function initParticleCanvas() {
         constructor() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 4 + 1;
-            this.speedX = (Math.random() - 0.5) * 0.4;
-            this.speedY = (Math.random() - 0.5) * 0.4;
-            this.type = Math.random() > 0.4 ? 'node' : 'leaf';
-            this.color = this.type === 'leaf' ? 'rgba(83, 117, 99, 0.18)' : 'rgba(9, 52, 38, 0.12)';
+            this.type = Math.random() > 0.15 ? 'leaf' : 'node';
+            this.size = this.type === 'leaf' ? Math.random() * 6 + 3 : Math.random() * 3 + 1;
+            this.speedX = Math.random() * 0.6 + 0.2; // drift rightward
+            this.speedY = Math.random() * 0.4 + 0.1; // drift downward
+            this.color = this.type === 'leaf' ? 'rgba(83, 117, 99, 0.25)' : 'rgba(9, 52, 38, 0.12)';
         }
 
         update() {
             this.x += this.speedX;
             this.y += this.speedY;
 
-            if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-            if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            // Wrap around boundaries for smooth floating effect
+            if (this.x > canvas.width + 10) {
+                this.x = -10;
+                this.y = Math.random() * canvas.height;
+            }
+            if (this.y > canvas.height + 10) {
+                this.y = -10;
+                this.x = Math.random() * canvas.width;
+            }
+            if (this.y < -10) this.y = canvas.height + 10;
 
             if (mouse.x != null && mouse.y != null) {
                 let dx = this.x - mouse.x;
@@ -199,8 +140,9 @@ function initParticleCanvas() {
                 if (distance < mouse.radius) {
                     let force = (mouse.radius - distance) / mouse.radius;
                     let angle = Math.atan2(dy, dx);
-                    this.x += Math.cos(angle) * force * 2;
-                    this.y += Math.sin(angle) * force * 2;
+                    // Push particles away gently from cursor
+                    this.x += Math.cos(angle) * force * 1.5;
+                    this.y += Math.sin(angle) * force * 1.5;
                 }
             }
         }
@@ -213,6 +155,7 @@ function initParticleCanvas() {
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
             } else {
+                // Floating organic leaf shape
                 ctx.moveTo(this.x, this.y - this.size * 2);
                 ctx.quadraticCurveTo(this.x + this.size * 1.5, this.y, this.x, this.y + this.size * 2);
                 ctx.quadraticCurveTo(this.x - this.size * 1.5, this.y, this.x, this.y - this.size * 2);
@@ -221,7 +164,7 @@ function initParticleCanvas() {
         }
     }
 
-    const particleCount = Math.min(60, Math.floor((canvas.width * canvas.height) / 25000));
+    const particleCount = Math.min(120, Math.floor((canvas.width * canvas.height) / 12000));
     for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
     }
@@ -508,7 +451,7 @@ function processSubmission(email, feedbackEl, successCallback) {
     const waitlist = getWaitlistData();
     const emailExists = waitlist.some(entry => entry.email === sanitizedEmail);
     if (emailExists) {
-        showFeedback(feedbackEl, 'This email is already in our waitlist database. Thank you!', 'error');
+        showFeedback(feedbackEl, 'This email is already in our database.', 'error');
         return;
     }
 
@@ -535,40 +478,8 @@ function processSubmission(email, feedbackEl, successCallback) {
         });
     }
 
-    // Google Sheets endpoint call
-    if (!GOOGLE_SHEET_URL) {
-        showFeedback(
-            feedbackEl, 
-            'Registered locally! (Setup Google Sheet Web App URL in app.js to sync automatically).', 
-            'success'
-        );
-        successCallback();
-        return;
-    }
-
-    showFeedback(feedbackEl, 'Syncing with spreadsheet registry...', 'success');
-
-    fetch(GOOGLE_SHEET_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-    })
-    .then(() => {
-        showFeedback(feedbackEl, 'Successfully added to waitlist! Verified in Spreadsheet.', 'success');
-        successCallback();
-    })
-    .catch((err) => {
-        console.error('Spreadsheet sync error:', err);
-        showFeedback(
-            feedbackEl, 
-            'Registered locally. Spreadsheet sync failed. Verify Web App script.', 
-            'error'
-        );
-        successCallback();
-    });
+    showFeedback(feedbackEl, 'Successfully registered for early access!', 'success');
+    successCallback();
 }
 
 function showFeedback(el, msg, type) {
@@ -580,29 +491,7 @@ function showFeedback(el, msg, type) {
 /* --------------------------------------------------------------------------
    9. Sheet Connection Setup Modal Guide
    -------------------------------------------------------------------------- */
-function openSetupModal(e) {
-    if (e) e.preventDefault();
-    const modal = document.getElementById('setup-modal');
-    if (!modal) return;
-
-    modal.classList.add('active');
-    gsap.from('#setup-modal .modal-card', { scale: 0.9, opacity: 0, y: 30, duration: 0.4, ease: 'back.out(1.2)' });
-}
-
-function closeSetupModal() {
-    const modal = document.getElementById('setup-modal');
-    if (!modal) return;
-
-    gsap.to('#setup-modal .modal-card', {
-        scale: 0.9,
-        opacity: 0,
-        y: 30,
-        duration: 0.25,
-        onComplete: () => {
-            modal.classList.remove('active');
-        }
-    });
-}
+// setupModal functions removed as database is purely local
 
 /* --------------------------------------------------------------------------
    10. Administrative Access Dashboard Modal
@@ -626,7 +515,8 @@ function openAdminDashboard(e) {
     
     document.getElementById('admin-auth-screen').style.display = 'flex';
     document.getElementById('admin-console-screen').style.display = 'none';
-    document.getElementById('admin-passcode').value = '';
+    document.getElementById('admin-username').value = '';
+    document.getElementById('admin-password').value = '';
     document.getElementById('auth-err-msg').style.display = 'none';
 }
 
@@ -646,10 +536,11 @@ function closeAdminDashboard() {
 }
 
 function verifyAdminAuth() {
-    const passcode = document.getElementById('admin-passcode').value;
+    const userVal = document.getElementById('admin-username').value.trim();
+    const passVal = document.getElementById('admin-password').value;
     const errMsg = document.getElementById('auth-err-msg');
     
-    if (passcode === 'admin123' || passcode === 'admin') {
+    if (userVal === 'admin' && (passVal === 'admin123' || passVal === 'admin')) {
         document.getElementById('admin-auth-screen').style.display = 'none';
         document.getElementById('admin-console-screen').style.display = 'block';
         renderWaitlistTable();
