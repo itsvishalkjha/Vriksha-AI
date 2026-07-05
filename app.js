@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 // 0. Configuration & Global Variables (Easily Customizable)
 // --------------------------------------------------------------------------
 // PLACEHOLDER URL: Replace with your deployed Google Apps Script Web App URL
-const GOOGLE_SHEET_URL = ''; 
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzK100B2Y6mvrHG-zcrmSr2Ia7zbdYoyLntu3vUBho8cuUvrNh60dJDCsot6FZysMecmg/exec';
 
 const LOCAL_STORAGE_KEY = 'vriksha_waitlist_emails';
 const DEFAULT_WAITLIST_COUNT = 1420;
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function initCustomCursor() {
     const cursor = document.querySelector('.custom-cursor');
     const dot = document.querySelector('.custom-cursor-dot');
-    
+
     if (!cursor || !dot) return;
 
     let mouseX = 0, mouseY = 0;
@@ -141,7 +141,7 @@ function initParticleCanvas() {
         draw() {
             ctx.fillStyle = this.color;
             ctx.beginPath();
-            
+
             if (this.type === 'node') {
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -189,7 +189,7 @@ function initParticleCanvas() {
         connectParticles();
         requestAnimationFrame(animateParticles);
     }
-    
+
     animateParticles();
 }
 
@@ -198,7 +198,7 @@ function initParticleCanvas() {
    -------------------------------------------------------------------------- */
 function initMagneticButtons() {
     const magneticBtns = document.querySelectorAll('.magnetic-btn');
-    
+
     magneticBtns.forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
             const rect = btn.getBoundingClientRect();
@@ -221,7 +221,7 @@ function initMagneticButtons() {
                     ease: 'power2.out'
                 });
             }
-            
+
             const btnIcon = btn.querySelector('svg');
             if (btnIcon) {
                 gsap.to(btnIcon, {
@@ -249,14 +249,14 @@ function initMagneticButtons() {
 function initHeroParallax() {
     const target = document.getElementById('parallax-target');
     const container = document.getElementById('scene-container');
-    
+
     if (!target || !container) return;
 
     container.addEventListener('mousemove', (e) => {
         const rect = container.getBoundingClientRect();
         const mouseX = e.clientX - rect.left - rect.width / 2;
         const mouseY = e.clientY - rect.top - rect.height / 2;
-        
+
         gsap.to(target, {
             rotationY: mouseX * 0.04,
             rotationX: -mouseY * 0.04,
@@ -286,7 +286,7 @@ function initHeroParallax() {
 function initScrollTriggerAnimations() {
     const track = document.getElementById('horizontal-track');
     const pinContainer = document.getElementById('horizontal-pin');
-    
+
     if (track && pinContainer) {
         let pinTimeline = gsap.timeline({
             scrollTrigger: {
@@ -321,9 +321,9 @@ function initScrollTriggerAnimations() {
                     toggleActions: 'play none none reverse'
                 }
             })
-            .from(num, { opacity: 0, y: -50, scale: 0.8, duration: 0.8, ease: 'power2.out' })
-            .from(illustration, { opacity: 0, scale: 0.85, rotation: -5, duration: 0.8, ease: 'back.out(1.2)' }, '-=0.6')
-            .from(details, { opacity: 0, x: 50, duration: 0.8, ease: 'power2.out' }, '-=0.6');
+                .from(num, { opacity: 0, y: -50, scale: 0.8, duration: 0.8, ease: 'power2.out' })
+                .from(illustration, { opacity: 0, scale: 0.85, rotation: -5, duration: 0.8, ease: 'back.out(1.2)' }, '-=0.6')
+                .from(details, { opacity: 0, x: 50, duration: 0.8, ease: 'power2.out' }, '-=0.6');
         });
     }
 
@@ -349,13 +349,13 @@ function initScrollTriggerAnimations() {
    -------------------------------------------------------------------------- */
 function initFaqAccordion() {
     const faqItems = document.querySelectorAll('.faq-item');
-    
+
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
-        
+
         question.addEventListener('click', () => {
             const isActive = item.classList.contains('active');
-            
+
             // Close all
             faqItems.forEach(i => {
                 i.classList.remove('active');
@@ -384,13 +384,13 @@ function initWaitlistCounter() {
 
     const currentCount = getWaitlistData().length;
     const totalCount = DEFAULT_WAITLIST_COUNT + currentCount;
-    
+
     gsap.from(counterEl, {
         textContent: 0,
         duration: 2.2,
         snap: { textContent: 1 },
         ease: 'power3.out',
-        onUpdate: function() {
+        onUpdate: function () {
             counterEl.textContent = Math.floor(this.targets()[0].textContent).toLocaleString();
         }
     });
@@ -409,7 +409,7 @@ function handleWaitlistSubmit(event) {
     event.preventDefault();
     const emailInput = document.getElementById('user-email');
     const feedbackMsg = document.getElementById('feedback-msg');
-    
+
     if (!emailInput || !feedbackMsg) return;
 
     processSubmission(emailInput.value, feedbackMsg, () => {
@@ -421,7 +421,7 @@ function handleWaitlistSubmitBottom(event) {
     event.preventDefault();
     const emailInput = document.getElementById('user-email-bottom');
     const feedbackMsg = document.getElementById('feedback-msg-bottom');
-    
+
     if (!emailInput || !feedbackMsg) return;
 
     processSubmission(emailInput.value, feedbackMsg, () => {
@@ -431,7 +431,7 @@ function handleWaitlistSubmitBottom(event) {
 
 function processSubmission(email, feedbackEl, successCallback) {
     const sanitizedEmail = email.trim().toLowerCase();
-    
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(sanitizedEmail)) {
         showFeedback(feedbackEl, 'Please enter a valid corporate email address.', 'error');
@@ -449,7 +449,7 @@ function processSubmission(email, feedbackEl, successCallback) {
         email: sanitizedEmail,
         timestamp: new Date().toISOString()
     };
-    
+
     // Save locally
     waitlist.push(payload);
     saveWaitlistData(waitlist);
@@ -462,7 +462,7 @@ function processSubmission(email, feedbackEl, successCallback) {
             textContent: currentVal + 1,
             duration: 0.8,
             snap: { textContent: 1 },
-            onUpdate: function() {
+            onUpdate: function () {
                 counterEl.textContent = Math.floor(this.targets()[0].textContent).toLocaleString();
             }
         });
@@ -485,19 +485,19 @@ function processSubmission(email, feedbackEl, successCallback) {
         },
         body: JSON.stringify(payload)
     })
-    .then(() => {
-        showFeedback(feedbackEl, 'Successfully registered for early access!', 'success');
-        successCallback();
-    })
-    .catch((err) => {
-        console.error('Spreadsheet sync error:', err);
-        showFeedback(
-            feedbackEl, 
-            'Registered locally. Spreadsheet sync failed.', 
-            'error'
-        );
-        successCallback();
-    });
+        .then(() => {
+            showFeedback(feedbackEl, 'Successfully registered for early access!', 'success');
+            successCallback();
+        })
+        .catch((err) => {
+            console.error('Spreadsheet sync error:', err);
+            showFeedback(
+                feedbackEl,
+                'Registered locally. Spreadsheet sync failed.',
+                'error'
+            );
+            successCallback();
+        });
 }
 
 function showFeedback(el, msg, type) {
@@ -530,7 +530,7 @@ function openAdminDashboard(e) {
 
     modal.classList.add('active');
     gsap.from('#admin-modal .modal-card', { scale: 0.9, opacity: 0, y: 30, duration: 0.4, ease: 'back.out(1.2)' });
-    
+
     document.getElementById('admin-auth-screen').style.display = 'flex';
     document.getElementById('admin-console-screen').style.display = 'none';
     document.getElementById('admin-username').value = '';
@@ -557,7 +557,7 @@ function verifyAdminAuth() {
     const userVal = document.getElementById('admin-username').value.trim();
     const passVal = document.getElementById('admin-password').value;
     const errMsg = document.getElementById('auth-err-msg');
-    
+
     if (userVal === 'admin' && (passVal === 'admin123' || passVal === 'admin')) {
         document.getElementById('admin-auth-screen').style.display = 'none';
         document.getElementById('admin-console-screen').style.display = 'block';
@@ -584,7 +584,7 @@ function renderWaitlistTable() {
     data.forEach((entry, idx) => {
         const row = document.createElement('tr');
         const formattedDate = new Date(entry.timestamp).toLocaleString();
-        
+
         row.innerHTML = `
             <td>${idx + 1}</td>
             <td style="font-weight: 500;">${entry.email}</td>
@@ -598,7 +598,7 @@ function renderWaitlistTable() {
 function filterWaitlist() {
     const query = document.getElementById('console-search').value.toLowerCase();
     const rows = document.querySelectorAll('#waitlist-table-rows tr');
-    
+
     rows.forEach(row => {
         const emailCell = row.querySelector('td:nth-child(2)');
         if (emailCell) {
@@ -615,7 +615,7 @@ function deleteWaitlistEntry(index, event) {
     let waitlist = getWaitlistData();
     waitlist.splice(index, 1);
     saveWaitlistData(waitlist);
-    
+
     renderWaitlistTable();
     initWaitlistCounter();
 }
@@ -635,7 +635,7 @@ function exportWaitlistCSV() {
     }
 
     let csvContent = "data:text/csv;charset=utf-8,Index,Corporate Email,Registration Date\r\n";
-    
+
     data.forEach((entry, idx) => {
         csvContent += `${idx + 1},${entry.email},${entry.timestamp}\r\n`;
     });
@@ -645,7 +645,7 @@ function exportWaitlistCSV() {
     link.setAttribute("href", encodedUri);
     link.setAttribute("download", `vriksha_waitlist_${new Date().toISOString().split('T')[0]}.csv`);
     document.body.appendChild(link);
-    
+
     link.click();
     document.body.removeChild(link);
 }
