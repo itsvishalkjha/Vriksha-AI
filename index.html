@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="vriksha.ai - Premium B2B AI solutions. Rooted in sustainability. AI Automation, Climate ESG Compliance, and AI Legal Aid systems for enterprise scale.">
+    <meta name="keywords" content="vriksha, vriksha.ai, B2B AI, ESG compliance, Climate AI, AI Legal Tech, AI automation, enterprise AI">
+    <meta property="og:title" content="vriksha.ai | Intelligent B2B AI Systems">
+    <meta property="og:description" content="B2B AI solutions provider merging advanced automation, climate regulatory compliance, and AI legal aid.">
+    <meta property="og:image" content="assets/vriksha_hero.png">
+    <title>vriksha.ai | Coming Soon & Waitlist</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Preloader & Loading Screen -->
+    <div id="preloader">
+        <div class="preloader-overlay">
+            <div class="logo-growth-wrapper">
+                <!-- Exact Logo Image -->
+                <img id="logo-wood-rings" src="assets/logo_icon_transparent.png" alt="vriksha.ai logo">
+                <div class="preloader-text-wrapper">
+                    <span class="loading-brand">VRIKSHA.AI</span>
+                    <span class="loading-status">INITIALIZING COGNITIVE NETWORK...</span>
+                </div>
+            </div>
+            <div class="loader-progress-bar">
+                <div class="loader-progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor Follower -->
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-dot"></div>
+
+    <!-- Fine Gridlines Overlay (Visual Aesthetic) -->
+    <div class="grid-overlay">
+        <div class="grid-line vertical"></div>
+        <div class="grid-line vertical"></div>
+        <div class="grid-line vertical"></div>
+        <div class="grid-line vertical"></div>
+        <div class="grid-line horizontal"></div>
+        <div class="grid-line horizontal"></div>
+    </div>
+
+    <!-- Background Bio-Digital Particle Canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Main App Container -->
+    <div id="app-content">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-inner">
+                <div class="brand-logo" id="logo-trigger">
+                    <!-- Wood Rings Logo in Header -->
+                    <img src="assets/logo_icon_transparent.png" class="mini-logo" alt="Vriksha.AI Logo">
+                    <span class="brand-name">VRIKSHA.AI</span>
+                </div>
+                <nav class="nav-links">
+                    <a href="#about" class="nav-link">Pillars</a>
+                    <a href="#why-us" class="nav-link">Architecture</a>
+                    <a href="#faq" class="nav-link">FAQs</a>
+                </nav>
+                <div class="header-cta">
+                    <button class="btn btn-secondary magnetic-btn" onclick="scrollToWaitlist()">
+                        <span>Join Waitlist</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section (Clean & Centered Layout) -->
+        <section class="hero-section" id="hero">
+            <div class="hero-centered-container">
+                <div class="hero-eyebrow">
+                    <span class="tag-pulse"></span>
+                    <span>ENTERPRISE B2B COGNITIVE SYSTEMS</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    INTELLIGENT SYSTEMS.<br>
+                    <span class="gradient-text">ROOTED IN NATURE.</span>
+                </h1>
+                
+                <p class="hero-description">
+                    vriksha.ai weaves advanced AI automation, ESG climate compliance auditing, and contextual legal intelligence directly into your operational roots. Remove the compliance headache for good.
+                </p>
+                
+                <!-- Register Waitlist Form (Google Sheet Enabled) -->
+                <div class="waitlist-form-container">
+                    <form id="waitlist-form" onsubmit="handleWaitlistSubmit(event)">
+                        <div class="input-group">
+                            <span class="input-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                            </span>
+                            <input type="email" id="user-email" placeholder="Enter corporate email address" required autocomplete="off">
+                            <button type="submit" class="btn btn-primary magnetic-btn">
+                                <span>Request Access</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                            </button>
+                        </div>
+                        <p class="form-feedback" id="feedback-msg"></p>
+                    </form>
+                </div>
+
+                <!-- Statistics counter -->
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="waitlist-counter">1,420</span>
+                        <span class="stat-label">B2B Enterprises Queued</span>
+                    </div>
+                    <div class="stat-item-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">99.8%</span>
+                        <span class="stat-label">ESG Regulatory Compliance</span>
+                    </div>
+                </div>
+
+                <!-- Interactive Hero Bonsai Graphic (Centered below form) -->
+                <div class="hero-graphic-block" id="scene-container">
+                    <div class="graphic-canvas-wrapper" id="parallax-target">
+                        <div class="ambient-glow"></div>
+                        <img src="assets/vriksha_hero.png" alt="vriksha.ai cybernetic bonsai" class="hero-visual-image">
+                        <div class="cyber-overlay">
+                            <svg class="overlay-mesh" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                <line x1="10" y1="0" x2="10" y2="100" stroke="rgba(78, 106, 91, 0.15)" stroke-width="0.5"/>
+                                <line x1="30" y1="0" x2="30" y2="100" stroke="rgba(78, 106, 91, 0.15)" stroke-width="0.5"/>
+                                <line x1="50" y1="0" x2="50" y2="100" stroke="rgba(78, 106, 91, 0.15)" stroke-width="0.5"/>
+                                <line x1="70" y1="0" x2="70" y2="100" stroke="rgba(78, 106, 91, 0.15)" stroke-width="0.5"/>
+                                <line x1="90" y1="0" x2="90" y2="100" stroke="rgba(78, 106, 91, 0.15)" stroke-width="0.5"/>
+                                <line x1="0" y1="20" x2="100" y2="20" stroke="rgba(78, 106, 91, 0.15)" stroke-width="0.5"/>
+                                <line x1="0" y1="50" x2="100" y2="50" stroke="rgba(78, 106, 91, 0.15)" stroke-width="0.5"/>
+                                <line x1="0" y1="80" x2="100" y2="80" stroke="rgba(78, 106, 91, 0.15)" stroke-width="0.5"/>
+                            </svg>
+                            <div class="laser-scanner"></div>
+                            
+                            <div class="graphic-tag tag-1" style="top: 25%; left: 15%;">
+                                <div class="tag-dot"></div>
+                                <div class="tag-title">AI.Services</div>
+                            </div>
+                            <div class="graphic-tag tag-2" style="top: 15%; right: 10%;">
+                                <div class="tag-dot"></div>
+                                <div class="tag-title">Compliance.ESG</div>
+                            </div>
+                            <div class="graphic-tag tag-3" style="bottom: 30%; right: 25%;">
+                                <div class="tag-dot"></div>
+                                <div class="tag-title">AI.Legal.Aid</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-scroll-indicator" onclick="scrollToContent()">
+                <span class="scroll-text">EXPLORE ARCHITECTURE</span>
+                <div class="scroll-arrow-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="scroll-arrow"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pillars Card Grid Section (Replacing Horizontal pin slider) -->
+        <section class="pillars-grid-section" id="about">
+            <div class="section-container">
+                <div class="tech-header text-center">
+                    <span class="section-label">SYSTEM ARCHITECTURE</span>
+                    <h2 class="tech-title">The Three Pillars of Vriksha</h2>
+                    <p class="tech-subtitle">We integrate advanced AI automation, ESG climate compliance, and legal intelligence into your operational roots.</p>
+                </div>
+                
+                <div class="pillars-grid">
+                    <!-- Pillar 1 Card -->
+                    <div class="pillar-card scroll-reveal">
+                        <div class="card-glow"></div>
+                        <div class="pillar-card-num">01</div>
+                        <div class="pillar-image-container">
+                            <img src="assets/pillar_automation.png" alt="AI Services & Automation" class="pillar-image">
+                            <div class="pillar-card-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#093426" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            </div>
+                        </div>
+                        <div class="pillar-info">
+                            <span class="pillar-card-tag">ROBUST OPERATIONS</span>
+                            <h3 class="pillar-card-title">Cognitive Services & Automation</h3>
+                            <p class="pillar-card-desc">Automate complex operational workflows. Our custom-engineered agentic pipelines connect directly to your databases, handling documentation and repetitive tasks with precision.</p>
+                            <ul class="pillar-card-features">
+                                <li><span class="bullet-dot"></span><span>Autonomous Agentic Workflows</span></li>
+                                <li><span class="bullet-dot"></span><span>Multi-Agent Ingestion Pipelines</span></li>
+                                <li><span class="bullet-dot"></span><span>Process Automation Audit trails</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Pillar 2 Card -->
+                    <div class="pillar-card scroll-reveal">
+                        <div class="card-glow"></div>
+                        <div class="pillar-card-num">02</div>
+                        <div class="pillar-image-container">
+                            <img src="assets/pillar_climate.png" alt="Climate ESG Compliance" class="pillar-image">
+                            <div class="pillar-card-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#093426" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+                            </div>
+                        </div>
+                        <div class="pillar-info">
+                            <span class="pillar-card-tag">GLOBAL COMPLIANCE</span>
+                            <h3 class="pillar-card-title">Climate Regulatory Compliance</h3>
+                            <p class="pillar-card-desc">Ingest manufacturing, logistics, and carbon metrics automatically. We cross-reference and map active ESG frameworks (CSRD, SEC) to compile audit dossiers.</p>
+                            <ul class="pillar-card-features">
+                                <li><span class="bullet-dot"></span><span>Automatic CSRD Reporting</span></li>
+                                <li><span class="bullet-dot"></span><span>Predictive ESG Risk Management</span></li>
+                                <li><span class="bullet-dot"></span><span>Supply-Chain Auditing Tools</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Pillar 3 Card -->
+                    <div class="pillar-card scroll-reveal">
+                        <div class="card-glow"></div>
+                        <div class="pillar-card-num">03</div>
+                        <div class="pillar-image-container">
+                            <img src="assets/pillar_legal.png" alt="AI Legal Aid" class="pillar-image">
+                            <div class="pillar-card-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#093426" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h18"/></svg>
+                            </div>
+                        </div>
+                        <div class="pillar-info">
+                            <span class="pillar-card-tag">RISK PROTECTION</span>
+                            <h3 class="pillar-card-title">AI Legal Aid & Document Audit</h3>
+                            <p class="pillar-card-desc">Audit and score corporate agreements in seconds. Spot indemnity issues, liabilities, and unfavourable terms using localized, hallucination-free B2B legal engines.</p>
+                            <ul class="pillar-card-features">
+                                <li><span class="bullet-dot"></span><span>Indemnity & Risk Identification</span></li>
+                                <li><span class="bullet-dot"></span><span>Custom Policy Compliance Checks</span></li>
+                                <li><span class="bullet-dot"></span><span>Playbook Policy Alignment Audits</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Architecture Section -->
+        <section class="tech-info-section" id="why-us">
+            <div class="section-container">
+                <div class="tech-header text-center">
+                    <span class="section-label">ENGINEERING CREDENTIALS</span>
+                    <h2 class="tech-title">A System Formed Like A Tree</h2>
+                    <p class="tech-subtitle">Our structural core models natural branching patterns to maximize compute efficiency and algorithmic security.</p>
+                </div>
+                
+                <div class="tech-grid">
+                    <!-- Card 1 -->
+                    <div class="tech-card scroll-reveal">
+                        <div class="card-glow"></div>
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h4 class="card-title">Encrypted Root Security</h4>
+                        <p class="card-desc">Zero-trust architecture keeps sensitive corporate data completely isolated, ensuring local LLM nodes operate solely within secure enterprise VPCs.</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="tech-card scroll-reveal">
+                        <div class="card-glow"></div>
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5-5 15-2-8-7-3 10-7z"/></svg>
+                        </div>
+                        <h4 class="card-title">Branching AI Agents</h4>
+                        <p class="card-desc">Specialized AI sub-processes branch from core workloads to handle sub-tasks, optimizing processing load and response cycles dynamically.</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="tech-card scroll-reveal">
+                        <div class="card-glow"></div>
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <h4 class="card-title">Green Compute Engines</h4>
+                        <p class="card-desc">AI solutions engineered to operate during optimal green energy windows, reducing processing carbon footprint by up to 40%.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section" id="faq">
+            <div class="faq-container">
+                <div class="faq-header text-center">
+                    <span class="section-label">KNOWLEDGE BASE</span>
+                    <h2 class="faq-title">Frequently Asked Questions</h2>
+                </div>
+                <div class="faq-list">
+                    <!-- Q1 -->
+                    <div class="faq-item scroll-reveal">
+                        <div class="faq-question">
+                            <span>What is vriksha.ai?</span>
+                            <div class="faq-toggle-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="plus-icon"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>vriksha.ai is a specialized B2B solutions provider. The word "Vriksha" means tree in Sanskrit, symbolizing our core architecture: deep roots in data protection, a strong trunk of legal compliance, and branching AI processes that deliver custom enterprise automations.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Q2 -->
+                    <div class="faq-item scroll-reveal">
+                        <div class="faq-question">
+                            <span>How does Climate ESG Compliance AI work?</span>
+                            <div class="faq-toggle-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="plus-icon"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our ESG systems monitor raw telemetry, ERP databases, and supply chain invoices. The engine matches this data with active frameworks like CSRD, GRI, and SASB, automatically predicting regulatory risks and compiling audit-ready compliance dossiers.</p>
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="faq-item scroll-reveal">
+                        <div class="faq-question">
+                            <span>Can we deploy vriksha.ai on our own cloud infrastructure?</span>
+                            <div class="faq-toggle-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="plus-icon"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes. Absolute compliance is our priority. vriksha.ai offers hybrid cloud integrations and private VPC deployments via AWS, GCP, or Azure, guaranteeing that zero operational data leaves your company bounds.</p>
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="faq-item scroll-reveal">
+                        <div class="faq-question">
+                            <span>When will the platform launch?</span>
+                            <div class="faq-toggle-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="plus-icon"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We are currently running a private sandbox beta with select Fortune 500 enterprises. We plan to open access to companies on our waitlist in Q4 2026. Registering your email secures your firm's position in the queue.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Waitlist CTA Section -->
+        <section class="cta-bottom-section" id="waitlist-register">
+            <div class="cta-container scroll-reveal">
+                <div class="ambient-glow circular"></div>
+                <div class="cta-content">
+                    <span class="section-label text-center">SECURE YOUR QUEUE SPOT</span>
+                    <h2 class="cta-heading text-center">Root Your Enterprise In Intelligent Automation</h2>
+                    <p class="cta-description text-center">
+                        Join our private beta waitlist to receive architecture documentation and schedule a private sandboxed demonstration of our automation, regulatory compliance, and legal compliance engines.
+                    </p>
+                    
+                    <div class="waitlist-form-container center">
+                        <form id="waitlist-form-bottom" onsubmit="handleWaitlistSubmitBottom(event)">
+                            <div class="input-group">
+                                <span class="input-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                </span>
+                                <input type="email" id="user-email-bottom" placeholder="Enter corporate email address" required autocomplete="off">
+                                <button type="submit" class="btn btn-primary magnetic-btn">
+                                    <span>Request Access</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                                </button>
+                            </div>
+                            <p class="form-feedback" id="feedback-msg-bottom"></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="footer-container">
+                <div class="footer-top">
+                    <div class="footer-brand">
+                        <div class="brand-logo">
+                            <!-- Wood rings logo tiny in footer -->
+                            <img src="assets/logo_icon_transparent.png" class="mini-logo" alt="Vriksha.AI Logo">
+                            <span class="brand-name">VRIKSHA.AI</span>
+                        </div>
+                        <p class="footer-tagline">AI B2B Solutions. Rooted in Nature.</p>
+                    </div>
+                    <div class="footer-links-group">
+                        <div class="footer-col">
+                            <span class="col-title">Pillars</span>
+                            <a href="#about" class="footer-link">AI Automation</a>
+                            <a href="#about" class="footer-link">Climate Regulatory Compliance</a>
+                            <a href="#about" class="footer-link">AI Legal Aid</a>
+                        </div>
+                        <div class="footer-col">
+                            <span class="col-title">Connect</span>
+                            <a href="https://twitter.com/vriksha_ai" target="_blank" class="footer-link">Twitter / X</a>
+                            <a href="https://linkedin.com/company/vriksha-ai" target="_blank" class="footer-link">LinkedIn</a>
+                        </div>
+                        <div class="footer-col">
+                            <span class="col-title">Console</span>
+                            <a href="#" onclick="openSetupModal(event)" class="footer-link special-link">Sheet Setup Guide</a>
+                            <a href="#" onclick="openAdminDashboard(event)" class="footer-link special-link">Admin Console</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p class="copyright">&copy; 2026 vriksha.ai. All rights reserved. Built for security & sustainability.</p>
+                    <p class="admin-tip">Shortcut: Press <code>Ctrl + Shift + A</code> to view registrations.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Admin Dashboard Modal -->
+    <div id="admin-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Waitlist Registry Admin Console</h3>
+                <button class="modal-close" onclick="closeAdminDashboard()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Passcode Screen -->
+                <div id="admin-auth-screen">
+                    <p class="auth-message">Enter administrative access credentials to view the waitlist register.</p>
+                    <div class="auth-input-group">
+                        <input type="password" id="admin-passcode" placeholder="Passcode (default: admin123)" autocomplete="current-password">
+                        <button class="btn btn-primary" onclick="verifyAdminAuth()">Authorize</button>
+                    </div>
+                    <p class="auth-error" id="auth-err-msg"></p>
+                </div>
+                
+                <!-- Main Console Screen (Hidden until Authorized) -->
+                <div id="admin-console-screen" style="display: none;">
+                    <div class="console-actions">
+                        <div class="search-box">
+                            <input type="text" id="console-search" placeholder="Filter by email..." oninput="filterWaitlist()">
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary" onclick="exportWaitlistCSV()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                <span>Export CSV</span>
+                            </button>
+                            <button class="btn btn-danger" onclick="clearWaitlistData()">Clear All Data</button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Index</th>
+                                    <th>Corporate Email</th>
+                                    <th>Registration Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="waitlist-table-rows">
+                                <!-- Populated dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sheet Connection Setup Modal Guide -->
+    <div id="setup-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Google Sheets Integration Guide</h3>
+                <button class="modal-close" onclick="closeSetupModal()">&times;</button>
+            </div>
+            <div class="modal-body setup-instructions">
+                <p>Connect your waitlist forms to a Google Sheet in under 3 minutes with zero server fees:</p>
+                <ol>
+                    <li>Create a new <strong>Google Sheet</strong>. Name column A: <code>email</code> and column B: <code>timestamp</code>.</li>
+                    <li>In the menu, go to <strong>Extensions &gt; Apps Script</strong>.</li>
+                    <li>Replace all code in the script editor with the following:
+                        <pre><code>function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var params = JSON.parse(e.postData.contents);
+  sheet.appendRow([params.email, params.timestamp]);
+  return ContentService.createTextOutput(JSON.stringify({"status":"success"}))
+    .setMimeType(ContentService.MimeType.JSON);
+}</code></pre>
+                    </li>
+                    <li>Click <strong>Deploy &gt; New Deployment</strong>. Select type <strong>Web App</strong>. Set "Execute as" to <strong>Me</strong> and "Who has access" to <strong>Anyone</strong>.</li>
+                    <li>Click <strong>Deploy</strong>, copy the resulting <strong>Web App URL</strong>, and paste it into the <code>GOOGLE_SHEET_URL</code> variable inside <strong>[app.js](file:///C:/Users/visha/.gemini/antigravity/scratch/vriksha-waitlist/app.js)</strong>.</li>
+                </ol>
+                <div class="setup-footer">
+                    <button class="btn btn-primary" onclick="closeSetupModal()">Got it</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Libraries (GSAP + ScrollTrigger) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- App Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
