@@ -468,8 +468,36 @@ function processSubmission(email, feedbackEl, successCallback) {
         });
     }
 
-    showFeedback(feedbackEl, 'Successfully registered for early access!', 'success');
-    successCallback();
+    // Google Sheets endpoint call
+    if (!GOOGLE_SHEET_URL) {
+        showFeedback(feedbackEl, 'Successfully registered for early access!', 'success');
+        successCallback();
+        return;
+    }
+
+    showFeedback(feedbackEl, 'Registering and syncing...', 'success');
+
+    fetch(GOOGLE_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(() => {
+        showFeedback(feedbackEl, 'Successfully registered for early access!', 'success');
+        successCallback();
+    })
+    .catch((err) => {
+        console.error('Spreadsheet sync error:', err);
+        showFeedback(
+            feedbackEl, 
+            'Registered locally. Spreadsheet sync failed.', 
+            'error'
+        );
+        successCallback();
+    });
 }
 
 function showFeedback(el, msg, type) {
